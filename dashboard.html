@@ -2,51 +2,38 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kaptan Ark - Yönetim Paneli</title>
+    <title>Kaptan Ark - Dashboard</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #0d1117; color: #ffffff; display: flex; height: 100vh; }
-        .sidebar { width: 250px; background-color: #161b22; border-right: 1px solid #30363d; padding: 20px; display: flex; flex-direction: column; }
-        .sidebar h2 { color: #5865F2; margin-bottom: 30px; font-size: 1.5rem; }
-        .sidebar a { color: #8b949e; text-decoration: none; padding: 10px 15px; border-radius: 6px; margin-bottom: 10px; transition: 0.2s; font-weight: 500; }
-        .sidebar a:hover, .sidebar a.active { background-color: #21262d; color: #ffffff; }
-        .main-content { flex: 1; padding: 40px; overflow-y: auto; }
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .card { background-color: #161b22; border: 1px solid #30363d; padding: 20px; border-radius: 10px; }
-        .card h3 { color: #5865F2; margin-bottom: 10px; }
-        .user-badge { background-color: #21262d; padding: 8px 15px; border-radius: 20px; font-size: 0.9rem; border: 1px solid #30363d; }
+        body { margin: 0; display: flex; background: #0c0d10; color: #fff; font-family: sans-serif; }
+        .sidebar { width: 260px; background: #161920; height: 100vh; padding: 20px; border-right: 1px solid #23272A; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: #5865F2; margin-bottom: 40px; }
+        .menu-item { color: #b9bbbe; padding: 12px; cursor: pointer; border-radius: 6px; margin-bottom: 5px; }
+        .menu-item:hover { background: #23272A; color: white; }
+        .main { flex: 1; padding: 40px; }
+        .server-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .card { background: #161920; padding: 20px; border-radius: 10px; border: 1px solid #23272A; text-align: center; }
+        .btn-manage { background: #5865F2; padding: 10px; border-radius: 5px; color: white; text-decoration: none; display: block; margin-top: 15px; }
     </style>
 </head>
 <body>
-
     <div class="sidebar">
-        <h2>Kaptan Ark</h2>
-        <a href="#" class="active">Sunucularım</a>
-        <a href="#">Bot Ayarları</a>
-        <a href="index.html" style="color: #f85149; margin-top: auto;">Çıkış Yap</a>
+        <div class="logo">Kaptan Ark</div>
+        <div class="menu-item">Sunucularım</div>
+        <div class="menu-item">Profil</div>
+        <div class="menu-item" style="color: #ed4245;">Çıkış Yap</div>
     </div>
-
-    <div class="main-content">
-        <div class="header">
-            <h1>Yönetim Paneli</h1>
-            <div class="user-badge">Kaptan (Giriş Yapıldı)</div>
-        </div>
-
-        <div class="card-grid">
+    <div class="main">
+        <h1>Sunucu Yönetimi</h1>
+        <div class="server-grid">
             <div class="card">
                 <h3>V8 Strength Stüdyo</h3>
-                <p>Durum: Aktif</p>
-                <a href="#" style="color: #5865F2; display: inline-block; margin-top: 15px; text-decoration: none; font-weight: bold;">Yönet &rarr;</a>
+                <a href="#" class="btn-manage">Yönetim Paneline Git</a>
             </div>
             <div class="card">
                 <h3>Kaptan'ın Yeri</h3>
-                <p>Durum: Aktif</p>
-                <a href="#" style="color: #5865F2; display: inline-block; margin-top: 15px; text-decoration: none; font-weight: bold;">Yönet &rarr;</a>
+                <a href="#" class="btn-manage">Yönetim Paneline Git</a>
             </div>
         </div>
     </div>
-
 </body>
 </html>
