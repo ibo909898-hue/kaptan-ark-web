@@ -2,38 +2,61 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Kaptan Ark - Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontrol Paneli</title>
     <style>
-        body { margin: 0; display: flex; background: #0c0d10; color: #fff; font-family: sans-serif; }
-        .sidebar { width: 260px; background: #161920; height: 100vh; padding: 20px; border-right: 1px solid #23272A; }
-        .logo { font-size: 1.5rem; font-weight: bold; color: #5865F2; margin-bottom: 40px; }
-        .menu-item { color: #b9bbbe; padding: 12px; cursor: pointer; border-radius: 6px; margin-bottom: 5px; }
-        .menu-item:hover { background: #23272A; color: white; }
-        .main { flex: 1; padding: 40px; }
-        .server-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .card { background: #161920; padding: 20px; border-radius: 10px; border: 1px solid #23272A; text-align: center; }
-        .btn-manage { background: #5865F2; padding: 10px; border-radius: 5px; color: white; text-decoration: none; display: block; margin-top: 15px; }
+        body { background: #1e1f22; color: #dbdee1; font-family: Arial, sans-serif; margin: 0; padding: 15px; }
+        .nav { background: #2b2d31; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        .nav a { display: inline-block; color: white; text-decoration: none; padding: 8px 15px; background: #313338; margin: 4px; border-radius: 5px; }
+        .nav a:hover { background: #5865F2; }
+        .card { background: #2b2d31; padding: 20px; border-radius: 8px; margin-bottom: 15px; }
+        input[type="text"] { width: 100%; padding: 10px; margin: 6px 0 14px 0; background: #1e1f22; border: 1px solid #4e5058; color: white; border-radius: 4px; box-sizing: border-box; }
+        button { background: #23a559; color: white; border: none; padding: 14px; border-radius: 5px; cursor: pointer; font-size: 16px; width: 100%; font-weight: bold; }
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <div class="logo">Kaptan Ark</div>
-        <div class="menu-item">Sunucularım</div>
-        <div class="menu-item">Profil</div>
-        <div class="menu-item" style="color: #ed4245;">Çıkış Yap</div>
+    <div class="nav">
+        <strong>Sunucuların:</strong><br>
+        {% for g in guilds %}
+            <a href="/dashboard?guild_id={{ g.id }}">{{ g.name }}</a>
+        {% endfor %}
+        <a href="/logout" style="background: #da373c;">Çıkış</a>
     </div>
-    <div class="main">
-        <h1>Sunucu Yönetimi</h1>
-        <div class="server-grid">
+
+    {% if selected_guild_id %}
+        <h2>⚙️ Sunucu Ayarları</h2>
+        {% if saved %}<p style="color: #23a559; font-weight: bold;">✅ Ayarlar başarıyla kaydedildi ve bota aktarıldı!</p>{% endif %}
+        <form method="POST">
             <div class="card">
-                <h3>V8 Strength Stüdyo</h3>
-                <a href="#" class="btn-manage">Yönetim Paneline Git</a>
+                <h3>🔧 Genel & Özel Komut</h3>
+                <label>Bot Prefix (Varsayılan: !):</label>
+                <input type="text" name="prefix" value="{{ config.get('prefix', '!') }}">
+                <label>Özel Komut (Örn: !ip):</label>
+                <input type="text" name="custom_cmd_trigger" value="{{ config.get('custom_cmd_trigger', '') }}">
+                <label>Özel Komut Cevabı:</label>
+                <input type="text" name="custom_cmd_response" value="{{ config.get('custom_cmd_response', '') }}">
             </div>
+
             <div class="card">
-                <h3>Kaptan'ın Yeri</h3>
-                <a href="#" class="btn-manage">Yönetim Paneline Git</a>
+                <h3>👋 Hoş Geldin, Sayaç & Oto-Rol</h3>
+                <label>Hoş Geldin Kanal ID (Boş bırakılırsa kod içi ID kullanılır):</label>
+                <input type="text" name="welcome_channel" value="{{ config.get('welcome_channel', '') }}">
+                <label>Sayaç Kanal ID:</label>
+                <input type="text" name="counter_channel" value="{{ config.get('counter_channel', '') }}">
+                <label>Otomatik Verilecek Rol Adı (Örn: Üye):</label>
+                <input type="text" name="auto_role_name" value="{{ config.get('auto_role_name', '') }}">
             </div>
-        </div>
-    </div>
+
+            <div class="card">
+                <h3>🛡️ Moderasyon & Seviye Sistemi</h3>
+                <label><input type="checkbox" name="anti_swear" {% if config.get('anti_swear') %}checked{% endif %}> Küfür / Reklam Engel Aktif</label><br><br>
+                <label><input type="checkbox" name="level_system" {% if config.get('level_system') %}checked{% endif %}> Seviye (Level) Sistemi Aktif (!seviye)</label>
+            </div>
+
+            <button type="submit">💾 Ayarları Kaydet</button>
+        </form>
+    {% else %}
+        <div class="card"><h3>Yukarıdan yönetmek istediğin sunucuyu seç.</h3></div>
+    {% endif %}
 </body>
 </html>
