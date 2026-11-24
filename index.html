@@ -2,20 +2,135 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Kaptan Ark - Giriş</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaptan Ark - Sunucunuz İçin Hepsi Bir Arada Discord Botu</title>
     <style>
-        body { background: #0c0d10; color: white; font-family: 'Inter', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .hero { text-align: center; }
-        h1 { font-size: 3.5rem; margin-bottom: 10px; color: #5865F2; }
-        .btn-login { background: #5865F2; color: white; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; transition: 0.3s; display: inline-block; }
-        .btn-login:hover { background: #4752c4; transform: scale(1.05); }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #16161e; color: #ffffff; line-height: 1.6; }
+
+        /* Üst Duyuru Bandı */
+        .top-banner { background: linear-gradient(90deg, #5865F2, #7b61ff); text-align: center; padding: 8px; font-size: 13px; font-weight: 600; }
+
+        /* Menü (Navbar) */
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 18px 8%; background-color: #1a1b26; border-bottom: 1px solid #292a36; flex-wrap: wrap; gap: 15px; }
+        .logo { font-size: 22px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo span { background: #5865F2; padding: 4px 10px; border-radius: 6px; font-size: 18px; }
+        .nav-links { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; }
+        .nav-links a { color: #a9b1d6; text-decoration: none; font-size: 15px; font-weight: 500; transition: 0.2s; }
+        .nav-links a:hover { color: #ffffff; }
+        .user-btn { background: #24283b; color: #fff; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; border: 1px solid #3b4261; }
+
+        /* Ana Bölüm (Hero) */
+        .hero { display: flex; justify-content: space-between; align-items: center; padding: 70px 8%; gap: 50px; flex-wrap: wrap; }
+        .hero-left { flex: 1; min-width: 300px; }
+        .hero-left h1 { font-size: 46px; font-weight: 800; line-height: 1.15; margin-bottom: 20px; color: #ffffff; }
+        .hero-left p { color: #9aa5ce; font-size: 17px; margin-bottom: 32px; max-width: 520px; }
+
+        .hero-buttons { display: flex; gap: 15px; flex-wrap: wrap; }
+        .btn-discord { background-color: #5865F2; color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 16px; transition: 0.2s; display: inline-block; }
+        .btn-discord:hover { background-color: #4752c4; }
+        .btn-panel { background-color: #24283b; color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 16px; border: 1px solid #414868; transition: 0.2s; display: inline-block; }
+        .btn-panel:hover { background-color: #2f354d; }
+
+        /* Sağ Taraftaki Canlı Discord Kartı (Erensi Tarzı) */
+        .hero-right { flex: 1; min-width: 300px; display: flex; justify-content: center; }
+        .preview-card { background: #1f2335; border: 1px solid #2f354d; border-radius: 14px; padding: 22px; width: 100%; max-width: 440px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); }
+        .channel-bar { color: #7aa2f7; font-weight: 700; font-size: 14px; border-bottom: 1px solid #292e42; padding-bottom: 10px; margin-bottom: 15px; }
+        .bot-msg { display: flex; gap: 12px; margin-bottom: 16px; }
+        .bot-avatar { width: 40px; height: 40px; border-radius: 50%; background: #5865F2; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; }
+        .msg-content h4 { font-size: 15px; color: #fff; display: flex; align-items: center; gap: 6px; }
+        .bot-tag { background: #5865F2; font-size: 10px; padding: 2px 5px; border-radius: 4px; }
+        .msg-content p { font-size: 14px; color: #c0caf5; margin-top: 3px; }
+
+        .rank-box { background: #16161e; border-radius: 10px; padding: 15px; margin-top: 10px; border: 1px solid #292e42; }
+        .rank-header { display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+        .progress-bg { background: #292e42; height: 10px; border-radius: 5px; overflow: hidden; }
+        .progress-fill { background: linear-gradient(90deg, #7aa2f7, #bb9af7); width: 78%; height: 100%; }
+
+        /* Özellikler Bölümü */
+        .features { padding: 50px 8%; background: #1a1b26; }
+        .features h2 { text-align: center; font-size: 30px; margin-bottom: 35px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+        .f-card { background: #1f2335; padding: 22px; border-radius: 10px; border: 1px solid #292e42; }
+        .f-card h3 { color: #7aa2f7; margin-bottom: 8px; font-size: 18px; }
+        .f-card p { color: #9aa5ce; font-size: 14px; }
     </style>
 </head>
 <body>
-    <div class="hero">
-        <h1>Kaptan Ark</h1>
-        <p>Erensi standartlarında, en üst düzey Discord yönetim paneli.</p><br>
-        <a href="dashboard.html" class="btn-login">Discord ile Giriş Yap</a>
-    </div>
+    <div class="top-banner">🦖 Kaptan Ark Bot - Gelişmiş Moderasyon, ARK Rehberi ve Ticket Sistemi Aktif!</div>
+
+    <nav class="navbar">
+        <a href="/" class="logo"><span>K</span> Kaptan Ark</a>
+        <div class="nav-links">
+            <a href="/">Ana Sayfa</a>
+            <a href="#ozellikler">Özellikler</a>
+            <a href="#komutlar">Komutlar</a>
+            {% if not user %}
+                <a href="/login" class="user-btn">Giriş Yap</a>
+            {% else %}
+                <a href="/dashboard" class="user-btn">👤 {{ user.username }}</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-left">
+            <h1>Sunucunuz için<br>hepsi bir arada<br>Discord botu</h1>
+            <p>Moderasyon, ARK canlı rehberi, seviye sistemi, çekiliş, ticket destek, karşılama ve daha fazlası tek bir botta.</p>
+            <div class="hero-buttons">
+                <a href="https://discord.com" target="_blank" class="btn-discord">Discord'a Ekle</a>
+                {% if not user %}
+                    <a href="/login" class="btn-panel">Kontrol Paneli</a>
+                {% else %}
+                    <a href="/dashboard" class="btn-panel">Kontrol Paneli</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="hero-right">
+            <div class="preview-card">
+                <div class="channel-bar"># seviye-ve-log</div>
+                <div class="bot-msg">
+                    <div class="bot-avatar">K</div>
+                    <div class="msg-content">
+                        <h4>Kaptan Ark <span class="bot-tag">BOT</span></h4>
+                        <p>🎉 Tebrikler <strong>@Kaptan</strong>, 18. seviyeye ulaştın! <code>!seviye</code> ile sıralamanı kontrol et.</p>
+                    </div>
+                </div>
+                <div class="rank-box">
+                    <div class="rank-header">
+                        <span>Kaptan (Genel XP)</span>
+                        <span style="color: #7aa2f7;">Seviye 18</span>
+                    </div>
+                    <div class="progress-bg">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <div style="text-align: right; font-size: 12px; color: #9aa5ce; margin-top: 6px;">32.840 / 37.000 XP</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="ozellikler">
+        <h2>Öne Çıkan Özellikler</h2>
+        <div class="grid">
+            <div class="f-card">
+                <h3>🦖 ARK Canlı Rehberi</h3>
+                <p>Dinozorların beslenme türlerini, bayıltma yöntemlerini ve özel yeteneklerini anında sorgulayın.</p>
+            </div>
+            <div class="f-card">
+                <h3>🛡️ Ultra Güvenlik & Moderasyon</h3>
+                <p>İzinsiz kanal/rol silme koruması, küfür/reklam engeli ve gelişmiş yetkili komutları.</p>
+            </div>
+            <div class="f-card">
+                <h3>🎫 Gelişmiş Ticket Sistemi</h3>
+                <p>Kategorili destek talepleri oluşturun ve tüm görüşmeleri log kanalında arşivleyin.</p>
+            </div>
+            <div class="f-card">
+                <h3>📊 Seviye & Karşılama</h3>
+                <p>Aktif üyelere otomatik XP/Seviye verin, gelen üyeleri sayaç ve otomatik rolle karşılayın.</p>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
